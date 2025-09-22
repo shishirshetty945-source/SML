@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+    'Satisfaction': ['Low', 'Medium', 'High', 'Low', 'Medium', 'High', 'High', 'Medium', 'Low',
+                     'High', 'Medium', 'Low', 'High', 'Medium', 'Low', 'High', 'Medium', 'Low'],
+    'RepeatPurchase': ['Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes', 'No', 'Yes',
+                       'No', 'Yes', 'No', 'Yes', 'No', 'Yes']
+}
+
+df = pd.DataFrame(data)
+
+plt.figure(figsize=(8, 5))
+sns.countplot(data=df, x='Satisfaction', hue='RepeatPurchase')
+plt.title('Customer Satisfaction vs Repeat Purchase')
+plt.xlabel('Satisfaction Level')
+plt.ylabel('Number of Customers')
+plt.legend(title='Repeat Purchase')
+plt.tight_layout()
+plt.show()
+
+cross_tab = pd.crosstab(df['Satisfaction'], df['RepeatPurchase'])
+crosstab.plot(kind='bar', stacked=True, colormap='Pastel1', figsize=(8, 5))
+plt.title('Stacked Bar Chart: Satisfaction vs Repeat Purchase')
+plt.xlabel('Satisfaction Level')
+plt.ylabel('Number of Customers')
+plt.legend(title='Repeat Purchase')
+plt.tight_layout()
+plt.show()

@@ -1,0 +1,11 @@
+import numpy as np
+
+house_prices = [45, 55, 60, 62, 68, 70, 75, 80, 85, 90, 100, 110, 125]
+
+q1 = np.percentile(house_prices, 25)
+q3 = np.percentile(house_prices, 75)
+iqr = q3 - q1
+
+print(f"25th Percentile (Q1): {q1}")
+print(f"75th Percentile (Q3): {q3}")
+print(f"Interquartile Range (IQR): {iqr}")

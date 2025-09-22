@@ -1,0 +1,25 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+data = {
+    'EngineSize_L': [1.2, 1.6, 2.0, 2.5, 3.0, 1.8, 2.2, 3.5, 4.0, 2.8],
+    'FuelEfficiency_MPG': [40, 35, 30, 28, 24, 33, 29, 20, 18, 26],
+    'Price_USD': [18000, 20000, 22000, 23000, 25000, 20000, 26000, 40000, 45000, 33000]
+}
+
+df = pd.DataFrame(data)
+
+sns.pairplot(df)
+plt.suptitle("Pair Plot: Engine Size, Fuel Efficiency, Price", y=1.02)
+plt.tight_layout()
+plt.show()
+
+corr_matrix = df.corr(numeric_only=True)
+print("Correlation Matrix:\n", corr_matrix)
+
+plt.figure(figsize=(6, 4))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Matrix: Car Features")
+plt.tight_layout()
+plt.show()

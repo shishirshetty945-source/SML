@@ -1,0 +1,20 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+np.random.seed(42)
+population = np.random.exponential(scale=50000, size=50000)
+
+sample_means = []
+for _ in range(10):
+    sample = np.random.choice(population, size=50, replace=True)
+    sample_means.append(np.mean(sample))
+
+plt.figure(figsize=(8, 5))
+sns.histplot(sample_means, bins=10, kde=True, color='skyblue', edgecolor='black')
+plt.title("Sampling Distribution of Mean Salaries (10 samples of size 50)")
+plt.xlabel("Mean Salary")
+plt.ylabel("Frequency")
+plt.grid(True)
+plt.tight_layout()
+plt.show()

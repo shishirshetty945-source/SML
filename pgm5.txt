@@ -1,0 +1,19 @@
+import scipy.stats as stats
+
+sample_mean = 8
+sample_std = 2
+n = 20
+mu = 0
+
+t_statistic = (sample_mean - mu) / (sample_std / (n ** 0.5))
+df = n - 1
+p_value = 2 * (1 - stats.t.cdf(abs(t_statistic), df=df))
+
+print(f"T-statistic: {t_statistic:.4f}")
+print(f"Degrees of freedom: {df}")
+print(f"P-value: {p_value:.4f}")
+
+if p_value < 0.05:
+    print("Result: Reject the null hypothesis. The increase is statistically significant.")
+else:
+    print("Result: Fail to reject the null hypothesis. The increase is not statistically significant.")
