@@ -1,0 +1,18 @@
+import numpy as np
+import pandas as pd
+
+intercept = 2.5
+beta_age = -0.03
+beta_condition = 0.5
+
+data = pd.DataFrame({
+    'Age': [60, 60],
+    'Condition': [1, 0]
+})
+
+data['log_lambda'] = intercept + beta_age * data['Age'] + beta_condition * data['Condition']
+data['lambda'] = np.exp(data['log_lambda'])
+increase_pct = ((data.loc[0, 'lambda'] - data.loc[1, 'lambda']) / data.loc[1, 'lambda']) * 100
+
+print(data[['Age', 'Condition', 'lambda']])
+print(f"\nIncrease in expected visits due to chronic condition: {increase_pct:.2f}%")

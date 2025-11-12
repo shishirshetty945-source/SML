@@ -1,0 +1,37 @@
+data = [
+    [200000, 1500],
+    [220000, 1700],
+    [250000, 2000],
+    [270000, 2100],
+    [290000, 2300],
+    [320000, 2500]
+]
+
+X = []
+y = []
+
+for price, sqft in data:
+    x1 = sqft
+    x2 = max(0, sqft - 2000)
+    X.append([1, x1, x2])
+    y.append(price)
+
+def transpose(matrix):
+    return [list(row) for row in zip(*matrix)]
+
+def matmul(A, B):
+    return [[sum(a * b for a, b in zip(row_a, col_b)) for col_b in zip(*B)] for row_a in A]
+
+def inverse_matrix_3x3(A):
+    import numpy as np
+    return np.linalg.inv(A).tolist()
+
+X_T = transpose(X)
+XTX = matmul(X_T, X)
+XTy = matmul(X_T, [[val] for val in y])
+beta = matmul(inverse_matrix_3x3(XTX), XTy)
+
+print("Spline Regression Coefficients:")
+print(f"Intercept: {beta[0][0]:.2f}")
+print(f"Before 2000 sqft slope: {beta[1][0]:.2f}")
+print(f"Change after 2000 sqft: {beta[2][0]:.2f}")
